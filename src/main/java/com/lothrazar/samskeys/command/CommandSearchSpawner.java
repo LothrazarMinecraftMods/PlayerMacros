@@ -3,7 +3,7 @@ package com.lothrazar.samskeys.command;
 import java.util.ArrayList;
 import java.util.List; 
 
-import com.lothrazar.samskeys.ModMain;
+import com.lothrazar.samskeys.ModKeyMacros;
 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
@@ -68,7 +68,7 @@ public class CommandSearchSpawner implements ICommand
 		
 		//BlockPos found = Util.findClosestBlock(player, Blocks.mob_spawner, radius);
 		
-		ArrayList<BlockPos> founds = ModMain.findBlocks(player, Blocks.mob_spawner, radius);
+		ArrayList<BlockPos> founds = ModKeyMacros.findBlocks(player, Blocks.mob_spawner, radius);
 		
 		if(founds.size() == 0)
 		{
@@ -81,7 +81,7 @@ public class CommandSearchSpawner implements ICommand
 			for(BlockPos found : founds) //if(found != null)
 			{ 
 				//"Found at : "+
-				m = ModMain.getCoordsOrReduced(player, found);//TODO: lang file?
+				m = ModKeyMacros.getCoordsOrReduced(player, found);//TODO: lang file?
 				player.addChatMessage(new ChatComponentTranslation( m )); 
 			}
 		}

@@ -2,7 +2,7 @@ package com.lothrazar.samskeys.command;
 
 import java.util.ArrayList; 
 
-import com.lothrazar.samskeys.ModMain;
+import com.lothrazar.samskeys.ModKeyMacros;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -32,20 +32,20 @@ public class PlaceLib
 		
 		if(player.inventory.getCurrentItem() == null || player.inventory.getCurrentItem().stackSize == 0)
 		{
-			ModMain.addChatMessage(player, "command.place.empty"); 
+			ModKeyMacros.addChatMessage(player, "command.place.empty"); 
 			return false;
 		}
 		Block pblock = Block.getBlockFromItem(player.inventory.getCurrentItem().getItem());
 
 		if(pblock == null)
 		{
-			ModMain.addChatMessage(player, "command.place.empty"); 
+			ModKeyMacros.addChatMessage(player, "command.place.empty"); 
 			return false;
 		}
 			
 		if(PlaceLib.isAllowed(pblock) == false)
 		{ 
-			ModMain.addChatMessage(player, "command.place.notallowed"); 
+			ModKeyMacros.addChatMessage(player, "command.place.notallowed"); 
 			return false;
 		}
 		
@@ -56,7 +56,7 @@ public class PlaceLib
 	{
 		//do this on the fly, could be items not around yet during config change
 		if(PlaceLib.allowed.size() == 0)
-			PlaceLib.allowed = ModMain.getBlockListFromCSV(PlaceLib.allowedFromConfig); 
+			PlaceLib.allowed = ModKeyMacros.getBlockListFromCSV(PlaceLib.allowedFromConfig); 
 	}         
 
 	public static boolean isAllowed(Block pblock)
@@ -133,9 +133,9 @@ public class PlaceLib
 			
 			world.setBlockState(p, placing);
 			
-			ModMain.decrHeldStackSize(player);
+			ModKeyMacros.decrHeldStackSize(player);
 
-			ModMain.playSoundAt(world, pos, placing.getBlock().stepSound.getPlaceSound());
+			ModKeyMacros.playSoundAt(world, pos, placing.getBlock().stepSound.getPlaceSound());
 		}
 	}
 
@@ -171,9 +171,9 @@ public class PlaceLib
 				//if(tryDrainExp(world,player,posCurrent) == false){break;}
 				
 				world.setBlockState(posCurrent, placing);
-				ModMain.decrHeldStackSize(player);
+				ModKeyMacros.decrHeldStackSize(player);
 	 
-				ModMain.playSoundAt(player, pblock.stepSound.getPlaceSound()); 
+				ModKeyMacros.playSoundAt(player, pblock.stepSound.getPlaceSound()); 
 				
 			}  
 		} //end of the outer loop
@@ -186,7 +186,7 @@ public class PlaceLib
     
 		boolean goVert = true;	
 	
-		EnumFacing pfacing = ModMain.getPlayerFacing(player);
+		EnumFacing pfacing = ModKeyMacros.getPlayerFacing(player);
 
         //it starts at eye level, so do down and forward one first
 		BlockPos posCurrent = player.getPosition().down().offset(pfacing);
@@ -214,9 +214,9 @@ public class PlaceLib
 			
 			world.setBlockState(posCurrent, placing);
 			
-			ModMain.decrHeldStackSize(player);
+			ModKeyMacros.decrHeldStackSize(player);
  
-			ModMain.playSoundAt(player, placing.getBlock().stepSound.getPlaceSound());
+			ModKeyMacros.playSoundAt(player, placing.getBlock().stepSound.getPlaceSound());
 		}
 	}
 	
@@ -227,7 +227,7 @@ public class PlaceLib
         boolean isLookingUp = (player.getLookVec().yCoord >= 0);//TODO: use this somehow? to place up/down? 
         
 		BlockPos posCurrent;
-		EnumFacing efacing = (player.isSneaking()) ? EnumFacing.DOWN : ModMain.getPlayerFacing(player);
+		EnumFacing efacing = (player.isSneaking()) ? EnumFacing.DOWN : ModKeyMacros.getPlayerFacing(player);
 		
 		for(int i = 1; i < want + 1; i = i + skip)
 		{
@@ -241,9 +241,9 @@ public class PlaceLib
 			
 			world.setBlockState(posCurrent, placing);
 			
-			ModMain.decrHeldStackSize(player);
+			ModKeyMacros.decrHeldStackSize(player);
  
-			ModMain.playSoundAt(player, pblock.stepSound.getPlaceSound());
+			ModKeyMacros.playSoundAt(player, pblock.stepSound.getPlaceSound());
 		}
 	}
 }

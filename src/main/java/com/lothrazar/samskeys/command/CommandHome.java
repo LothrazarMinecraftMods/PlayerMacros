@@ -3,7 +3,7 @@ package com.lothrazar.samskeys.command;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lothrazar.samskeys.ModMain; 
+import com.lothrazar.samskeys.ModKeyMacros; 
 import net.minecraft.block.Block;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
@@ -60,11 +60,11 @@ public class CommandHome implements ICommand
 			 return;
 		}
 		
-		BlockPos realBedPos = ModMain.getBedLocationSafe(world, player);
+		BlockPos realBedPos = ModKeyMacros.getBedLocationSafe(world, player);
 		 
 		if(realBedPos != null)
 		{ 
-			ModMain.teleportWallSafe(player, world, realBedPos); 
+			ModKeyMacros.teleportWallSafe(player, world, realBedPos); 
 			world.playSoundAtEntity(player, "mob.endermen.portal", 1.0F, 1.0F);
 		}
 		else

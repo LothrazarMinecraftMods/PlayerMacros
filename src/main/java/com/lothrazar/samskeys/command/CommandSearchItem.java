@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;    
 
-import com.lothrazar.samskeys.ModMain; 
+import com.lothrazar.samskeys.ModKeyMacros; 
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -84,21 +84,21 @@ public class CommandSearchItem  implements ICommand
 		HashMap<IInventory,BlockPos> dictionary = new HashMap<IInventory,BlockPos> ();
 		IInventory tile;
 		
-		ArrayList<BlockPos> foundChests = ModMain.findBlocks(player, Blocks.chest, radius); 
+		ArrayList<BlockPos> foundChests = ModKeyMacros.findBlocks(player, Blocks.chest, radius); 
 		for (BlockPos pos : foundChests)
 		{  	
 			tile = (IInventory)player.worldObj.getTileEntity(pos);  
 			tilesToSearch.add(tile); 
 			dictionary.put(tile, pos);
 		}
-		ArrayList<BlockPos> foundTrapChests = ModMain.findBlocks(player, Blocks.trapped_chest, radius); 
+		ArrayList<BlockPos> foundTrapChests = ModKeyMacros.findBlocks(player, Blocks.trapped_chest, radius); 
 		for (BlockPos pos : foundTrapChests)
 		{  	
 			tile = (IInventory)player.worldObj.getTileEntity(pos);  
 			tilesToSearch.add(tile); 
 			dictionary.put(tile, pos);
 		}
-		ArrayList<BlockPos> foundDisp = ModMain.findBlocks(player, Blocks.dispenser, radius); 
+		ArrayList<BlockPos> foundDisp = ModKeyMacros.findBlocks(player, Blocks.dispenser, radius); 
 		for (BlockPos pos : foundDisp)
 		{  	
 			tile = (IInventory)player.worldObj.getTileEntity(pos);  
@@ -120,9 +120,9 @@ public class CommandSearchItem  implements ICommand
 				
 				//TODO we COULD have configs for each of these, that is, one config flag for SEND_CHAT
 				//and one for SEND_PARTICLES
-				ModMain.spawnParticlePacketByID(dictionary.get(inventory),EnumParticleTypes.CRIT_MAGIC.getParticleID());
+				ModKeyMacros.spawnParticlePacketByID(dictionary.get(inventory),EnumParticleTypes.CRIT_MAGIC.getParticleID());
 				
-				foundMessages.add(totalsStr + ModMain.getCoordsOrReduced(player,dictionary.get(inventory)));
+				foundMessages.add(totalsStr + ModKeyMacros.getCoordsOrReduced(player,dictionary.get(inventory)));
 			}  
 		}
   
@@ -148,7 +148,7 @@ public class CommandSearchItem  implements ICommand
 		if(showCoords)
 			return pos.getX() + ", " + pos.getY() + ", " + pos.getZ();
 		else
-			return ModMain.getDirectionsString(player, pos); 
+			return ModKeyMacros.getDirectionsString(player, pos); 
 	}
 	private int searchTileInventory(String search, IInventory inventory) 
 	{

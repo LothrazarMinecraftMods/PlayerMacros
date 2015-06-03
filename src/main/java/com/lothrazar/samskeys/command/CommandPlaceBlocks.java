@@ -3,7 +3,7 @@ package com.lothrazar.samskeys.command;
 import java.util.ArrayList;
 import java.util.List; 
 
-import com.lothrazar.samskeys.ModMain;
+import com.lothrazar.samskeys.ModKeyMacros;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -61,7 +61,7 @@ public class CommandPlaceBlocks implements ICommand
 
 		if(args.length == 0)
 		{ 
-			ModMain.addChatMessage(player, getCommandUsage(sender));
+			ModKeyMacros.addChatMessage(player, getCommandUsage(sender));
 			return;
 		}
 		
@@ -75,7 +75,7 @@ public class CommandPlaceBlocks implements ICommand
 		}
 		catch (Exception e)
 		{
-			ModMain.addChatMessage(player, getCommandUsage(sender));
+			ModKeyMacros.addChatMessage(player, getCommandUsage(sender));
 			return;
 		}
 
@@ -88,7 +88,7 @@ public class CommandPlaceBlocks implements ICommand
     		}
     		catch (NumberFormatException e)
     		{
-    			ModMain.addChatMessage(player, getCommandUsage(sender));
+    			ModKeyMacros.addChatMessage(player, getCommandUsage(sender));
     			return;
     		}
         }
@@ -101,7 +101,7 @@ public class CommandPlaceBlocks implements ICommand
 			}
 			catch (NumberFormatException e)
 			{
-				ModMain.addChatMessage(player, getCommandUsage(sender));
+				ModKeyMacros.addChatMessage(player, getCommandUsage(sender));
     			return;
 			}
         }
@@ -111,7 +111,7 @@ public class CommandPlaceBlocks implements ICommand
 		if( vertOffset > VERTICAL_MAX ||
 			vertOffset < VERTICAL_MAX*-1) 
 		{
-			ModMain.addChatMessage(player, ModMain.lang("command.place.vertical"));
+			ModKeyMacros.addChatMessage(player, ModKeyMacros.lang("command.place.vertical"));
 			return;
 		}
 		

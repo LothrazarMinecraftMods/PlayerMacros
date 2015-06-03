@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;     
 
 import com.lothrazar.samskeys.Location;
-import com.lothrazar.samskeys.ModMain;
+import com.lothrazar.samskeys.ModKeyMacros;
 import com.lothrazar.samskeys.PlayerPowerups;
 
 import net.minecraft.client.Minecraft;
@@ -194,17 +194,17 @@ public class CommandSimpleWaypoints  implements ICommand
 		
 		if(loc == null)
 		{
-			ModMain.addChatMessage(player, "waypoints.tp.notfound");
+			ModKeyMacros.addChatMessage(player, "waypoints.tp.notfound");
 		}
 		else
 		{
 			if(player.dimension != loc.dimension)
 			{
-				ModMain.addChatMessage(player, "waypoints.tp.dimension");
+				ModKeyMacros.addChatMessage(player, "waypoints.tp.dimension");
 			}
 			else
 			{
-				ModMain.teleportWallSafe(player, player.worldObj, new BlockPos(loc.X,loc.Y,loc.Z));
+				ModKeyMacros.teleportWallSafe(player, player.worldObj, new BlockPos(loc.X,loc.Y,loc.Z));
 				//TODO:
 				//ModMain.drainExp(player, EXP_COST_TP);
 			}

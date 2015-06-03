@@ -3,7 +3,7 @@ package com.lothrazar.samskeys.command;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lothrazar.samskeys.ModMain;
+import com.lothrazar.samskeys.ModKeyMacros;
 import com.lothrazar.samskeys.proxy.ClientProxy; 
 
 import net.minecraft.command.CommandException;
@@ -56,7 +56,7 @@ public class CommandBindMacro implements ICommand
 
 		if(args.length == 0 || args[0] == null)
 		{ 
-			ModMain.addChatMessage(player, getCommandUsage(sender));
+			ModKeyMacros.addChatMessage(player, getCommandUsage(sender));
 			return;
 		}
 		
@@ -66,10 +66,10 @@ public class CommandBindMacro implements ICommand
 			for(int k = KMIN; k <= KMAX; k++)
 			{
 				mList = getPlayerMacro(player,KEY_MACRO_base + k);
-				if(mList==null || mList.isEmpty()) {mList = ModMain.lang("command.bind.empty");}
+				if(mList==null || mList.isEmpty()) {mList = ModKeyMacros.lang("command.bind.empty");}
 				// ClientProxy.keyBind1 real name not number
 				String keyname = ClientProxy.getKeyDescription(k);
-				ModMain.addChatMessage(player, keyname+" : "+mList);
+				ModKeyMacros.addChatMessage(player, keyname+" : "+mList);
 			}
 			
 			return;
@@ -79,7 +79,7 @@ public class CommandBindMacro implements ICommand
 		
 		if(inKey.length() != 1)
 		{
-			ModMain.addChatMessage(player, getCommandUsage(sender));
+			ModKeyMacros.addChatMessage(player, getCommandUsage(sender));
 			return;
 		}
 	 
@@ -107,13 +107,13 @@ public class CommandBindMacro implements ICommand
 		if(match == 0)
 		{
 			//letter not bound
-			ModMain.lang("command.bind.empty");
+			ModKeyMacros.lang("command.bind.empty");
 			return;
 		}
 		
 		player.getEntityData().setString(KEY_MACRO_base + match, full);
 
-		ModMain.addChatMessage(player, ModMain.lang("command.bind.done")+" "+inKey+" "+full);
+		ModKeyMacros.addChatMessage(player, ModKeyMacros.lang("command.bind.done")+" "+inKey+" "+full);
 		
 	}
 	  
@@ -128,12 +128,12 @@ public class CommandBindMacro implements ICommand
 
 		if(cmd==null||cmd.isEmpty())
 		{
-			ModMain.addChatMessage(player, ModMain.lang("command.bind.empty"));
+			ModKeyMacros.addChatMessage(player, ModKeyMacros.lang("command.bind.empty"));
 			return;
 		}
 		
 	 
-		ModMain.execute(player,cmd);
+		ModKeyMacros.execute(player,cmd);
 	}
 
 	@Override

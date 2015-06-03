@@ -3,7 +3,7 @@ package com.lothrazar.samskeys.command;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lothrazar.samskeys.ModMain; 
+import com.lothrazar.samskeys.ModKeyMacros; 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -59,12 +59,12 @@ public class CommandPing implements ICommand
 			double z = p.getZ();
 			BlockPos n = new BlockPos(x/netherRatio,p.getY(),z/netherRatio);
 			
-			ModMain.addChatMessage(player, ModMain.posToString(n));
+			ModKeyMacros.addChatMessage(player, ModKeyMacros.posToString(n));
 			
 			return;
 		}
 		
-		ModMain.addChatMessage(player, ModMain.posToString(player.getPosition()));
+		ModKeyMacros.addChatMessage(player, ModKeyMacros.posToString(player.getPosition()));
 	}
 
 	@Override

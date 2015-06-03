@@ -45,15 +45,15 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
   
-@Mod(modid = ModMain.MODID, version = ModMain.VERSION,	name = ModMain.NAME, useMetadata = true )  
-public class ModMain
+@Mod(modid = ModKeyMacros.MODID, version = ModKeyMacros.VERSION,	name = ModKeyMacros.NAME, useMetadata = true )  
+public class ModKeyMacros
 {
 	public static final String MODID = "samskeys"; 
 	public static final String TEXTURE_LOCATION = MODID + ":";
 	public static final String VERSION = "1.8-1.4.0";
 	public static final String NAME = "Builder's Powerups";
 	@Instance(value = MODID)
-	public static ModMain instance;
+	public static ModKeyMacros instance;
 	@SidedProxy(clientSide="com.lothrazar.samskeys.proxy.ClientProxy", serverSide="com.lothrazar.samskeys.proxy.CommonProxy")
 	public static CommonProxy proxy;   
 	public static Logger logger; 
@@ -84,43 +84,43 @@ public class ModMain
 	@EventHandler
 	public void onServerStarting(FMLServerStartingEvent event)
 	{
-		if(ModMain.cfg.cmd_searchtrade) 
+		if(ModKeyMacros.cfg.cmd_searchtrade) 
 			event.registerServerCommand(new CommandSearchTrades()); 
 		
-		if(ModMain.cfg.cmd_searchitem) 
+		if(ModKeyMacros.cfg.cmd_searchitem) 
 			event.registerServerCommand(new CommandSearchItem()); 
 		
-		if(ModMain.cfg.cmd_searchspawner) 
+		if(ModKeyMacros.cfg.cmd_searchspawner) 
 			event.registerServerCommand(new CommandSearchSpawner()); 
 		 
-		if(ModMain.cfg.cmd_simplewaypoint) 
+		if(ModKeyMacros.cfg.cmd_simplewaypoint) 
 			event.registerServerCommand(new CommandSimpleWaypoints()); 
 		
-		if(ModMain.cfg.cmd_enderchest) 
+		if(ModKeyMacros.cfg.cmd_enderchest) 
 			event.registerServerCommand(new CommandEnderChest()); 
 		
-		if(ModMain.cfg.cmd_todo) 
+		if(ModKeyMacros.cfg.cmd_todo) 
 			event.registerServerCommand(new CommandTodoList());  
 		 
-		if(ModMain.cfg.cmd_kit)  
+		if(ModKeyMacros.cfg.cmd_kit)  
 			event.registerServerCommand(new CommandKit()); 
   
-		if(ModMain.cfg.cmd_home) 
+		if(ModKeyMacros.cfg.cmd_home) 
 			event.registerServerCommand(new CommandWorldHome()); 
 		
-		if(ModMain.cfg.worldhome) 
+		if(ModKeyMacros.cfg.worldhome) 
 			event.registerServerCommand(new CommandHome());
 
-		if(ModMain.cfg.cmd_place_blocks) 
+		if(ModKeyMacros.cfg.cmd_place_blocks) 
 			event.registerServerCommand(new CommandPlaceBlocks());
 	 
-		if(ModMain.cfg.cmd_recipe) 
+		if(ModKeyMacros.cfg.cmd_recipe) 
 			event.registerServerCommand(new CommandRecipe());
 
-		if(ModMain.cfg.cmd_uses) 
+		if(ModKeyMacros.cfg.cmd_uses) 
 			event.registerServerCommand(new CommandUses());
   
-		if(ModMain.cfg.cmd_ping) 
+		if(ModKeyMacros.cfg.cmd_ping) 
 			event.registerServerCommand(new CommandPing());
 		
 		//these ones are always here. no reason to disable.
@@ -158,39 +158,39 @@ public class ModMain
 		//TODO: key handler class? maybe a better way to do this than copying the same code??
         if(ClientProxy.keyShiftUp.isPressed() )
         { 	     
-        	 ModMain.network.sendToServer( new MessageKeyPressed(ClientProxy.keyShiftUp.getKeyCode()));  
+        	 ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyShiftUp.getKeyCode()));  
         }        
         else if(ClientProxy.keyShiftDown.isPressed() )
         { 	      
-        	 ModMain.network.sendToServer( new MessageKeyPressed(ClientProxy.keyShiftDown.getKeyCode()));  
+        	 ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyShiftDown.getKeyCode()));  
         }      
         else if(ClientProxy.keyBarDown.isPressed() )
         { 	      
-        	 ModMain.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBarDown.getKeyCode()));  
+        	 ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBarDown.getKeyCode()));  
         }  
         else if(ClientProxy.keyBarUp.isPressed() )
         { 	      
-        	 ModMain.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBarUp.getKeyCode()));  
+        	 ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBarUp.getKeyCode()));  
         }   
         else if(ClientProxy.keyBindMacro1.isPressed())
         {
-       		ModMain.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBindMacro1.getKeyCode()));
+       		ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBindMacro1.getKeyCode()));
         }
         else if(ClientProxy.keyBindMacro2.isPressed())
         {
-       		ModMain.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBindMacro2.getKeyCode()));
+       		ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBindMacro2.getKeyCode()));
         }
         else if(ClientProxy.keyPush.isPressed())
         {
-       		ModMain.network.sendToServer( new MessageKeyPressed(ClientProxy.keyPush.getKeyCode()));
+       		ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyPush.getKeyCode()));
         }
         else if(ClientProxy.keyPull.isPressed())
         {
-       		ModMain.network.sendToServer( new MessageKeyPressed(ClientProxy.keyPull.getKeyCode()));
+       		ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyPull.getKeyCode()));
         }
         else if(ClientProxy.keyTransform.isPressed())
         {
-       		ModMain.network.sendToServer( new MessageKeyPressed(ClientProxy.keyTransform.getKeyCode()));
+       		ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyTransform.getKeyCode()));
         } 
     } 
 	public static void playSoundAt(World world,BlockPos pos, String sound)
@@ -254,7 +254,7 @@ public class ModMain
 			 
 			if(isItNull == null)
 			{
-				ModMain.logger.log(Level.WARN, "Item not found : "+ ids[i]);
+				ModKeyMacros.logger.log(Level.WARN, "Item not found : "+ ids[i]);
 			}
 			else
 			{
@@ -276,7 +276,7 @@ public class ModMain
 			 
 			 if(b == null)
 			 {
-				 ModMain.logger.log(Level.WARN, "getBlockListFromCSV : Block not found : "+id);
+				 ModKeyMacros.logger.log(Level.WARN, "getBlockListFromCSV : Block not found : "+id);
 			 }
 			 else 
 			 {
@@ -358,7 +358,7 @@ public class ModMain
 	public static void spawnParticlePacketByID(BlockPos position, int particleID)
 	{
 		//this. fires only on server side. so send packet for client to spawn particles and so on
-		ModMain.network.sendToAll(new MessagePotion(position, particleID));
+		ModKeyMacros.network.sendToAll(new MessagePotion(position, particleID));
     	
 		
 	}

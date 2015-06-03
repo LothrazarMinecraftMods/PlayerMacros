@@ -3,7 +3,7 @@ package com.lothrazar.samskeys.command;
 import java.util.ArrayList;
 import java.util.List; 
 
-import com.lothrazar.samskeys.ModMain;
+import com.lothrazar.samskeys.ModKeyMacros;
 
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -63,8 +63,8 @@ public class CommandWorldHome  implements ICommand
 		//this tends to always get something at y=64, regardless if there is AIR or not 
 		//so we need to safely push the player up out of any blocks they are in
 		
-		ModMain.teleportWallSafe(player, world, world.getSpawnPoint()); 
-		ModMain.playSoundAt(player,  "mob.endermen.portal");
+		ModKeyMacros.teleportWallSafe(player, world, world.getSpawnPoint()); 
+		ModKeyMacros.playSoundAt(player,  "mob.endermen.portal");
 	}
  
 	@Override

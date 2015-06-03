@@ -3,7 +3,7 @@ package com.lothrazar.samskeys.command;
 import java.util.ArrayList;
 import java.util.List; 
 
-import com.lothrazar.samskeys.ModMain; 
+import com.lothrazar.samskeys.ModKeyMacros; 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -66,7 +66,7 @@ public class CommandKit implements ICommand
 			}
 			
 			//set the flag so we cannot run this again (unless we die)
-			ModMain.incrementPlayerIntegerNBT(p, getName(),1);
+			ModKeyMacros.incrementPlayerIntegerNBT(p, getName(),1);
 		}
 		else
 		{
@@ -96,7 +96,7 @@ public class CommandKit implements ICommand
 	{
 		//do this on the fly, could be items not around yet during config change
 		if(giveItems.size() == 0)
-			giveItems = ModMain.getItemListFromCSV(giveItemsFromConfig); 
+			giveItems = ModKeyMacros.getItemListFromCSV(giveItemsFromConfig); 
 	}
 	
 	public static void setItemsFromString(String csv)

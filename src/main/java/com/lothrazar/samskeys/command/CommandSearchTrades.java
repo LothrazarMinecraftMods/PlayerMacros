@@ -3,7 +3,7 @@ package com.lothrazar.samskeys.command;
 import java.util.ArrayList;
 import java.util.List; 
 
-import com.lothrazar.samskeys.ModMain; 
+import com.lothrazar.samskeys.ModKeyMacros; 
 
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -159,7 +159,7 @@ public class CommandSearchTrades  implements ICommand
 					 messages.add(m); 
 					 
 					 
-					 ModMain.spawnParticlePacketByID(((Entity)villagers.get(i)).getPosition()
+					 ModKeyMacros.spawnParticlePacketByID(((Entity)villagers.get(i)).getPosition()
 							 ,EnumParticleTypes.CRIT_MAGIC.getParticleID());
 					
 				 }

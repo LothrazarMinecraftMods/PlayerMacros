@@ -736,11 +736,11 @@ public class UtilBlockTransform
 			 
 			if(world.isRemote) // clientside
 			{
-				ModMain.spawnParticle(world, EnumParticleTypes.CRIT_MAGIC, pos); 
+				ModKeyMacros.spawnParticle(world, EnumParticleTypes.CRIT_MAGIC, pos); 
 			}
 			else
 			{
-				ModMain.playSoundAt(player, "random.wood_click");
+				ModKeyMacros.playSoundAt(player, "random.wood_click");
  
 				player.worldObj.setBlockState(pos,blockStateNew);
 				  

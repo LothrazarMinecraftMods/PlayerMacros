@@ -19,7 +19,7 @@ public class UtilPistonSpell
 	private static void translateCSV()
 	{
 		//do this on the fly, could be items not around yet during config change
-		ignoreList = ModMain.getBlockListFromCSV(ignoreListFromConfig); 
+		ignoreList = ModKeyMacros.getBlockListFromCSV(ignoreListFromConfig); 
 	}
 	public static void seIgnoreBlocksFromString(String csv)
 	{ 
@@ -40,11 +40,11 @@ public class UtilPistonSpell
 		{
 			if(world.isRemote) 
 			{
-				ModMain.spawnParticle(world, EnumParticleTypes.CRIT_MAGIC, pos); 
+				ModKeyMacros.spawnParticle(world, EnumParticleTypes.CRIT_MAGIC, pos); 
 			}
 			else
 			{  
-				ModMain.playSoundAt(player, "random.wood_click");
+				ModKeyMacros.playSoundAt(player, "random.wood_click");
 
 				//they swap places
 				//world.destroyBlock(posMoveToHere, false);
