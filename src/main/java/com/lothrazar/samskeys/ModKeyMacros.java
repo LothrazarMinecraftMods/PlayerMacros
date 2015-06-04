@@ -50,8 +50,8 @@ public class ModKeyMacros
 {
 	public static final String MODID = "samskeys"; 
 	public static final String TEXTURE_LOCATION = MODID + ":";
-	public static final String VERSION = "1.8-1.4.0";
-	public static final String NAME = "Builder's Powerups";
+	public static final String VERSION = "1.8-1.0.0";
+	public static final String NAME = "Builder's Macros";
 	@Instance(value = MODID)
 	public static ModKeyMacros instance;
 	@SidedProxy(clientSide="com.lothrazar.samskeys.proxy.ClientProxy", serverSide="com.lothrazar.samskeys.proxy.CommonProxy")
