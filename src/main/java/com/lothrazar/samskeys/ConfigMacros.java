@@ -3,7 +3,7 @@ package com.lothrazar.samskeys;
 import net.minecraftforge.common.config.Configuration;  
 import com.lothrazar.samskeys.command.*;   
 
-public class ConfigRegistry
+public class ConfigMacros
 { 
 	private Configuration instance;
 	private String category = "";
@@ -13,7 +13,7 @@ public class ConfigRegistry
 		return instance;
 	}
 	
-	public ConfigRegistry(Configuration c)
+	public ConfigMacros(Configuration c)
 	{
 		instance = c; 
 		instance.load();

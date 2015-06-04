@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
    
 
 
-import com.lothrazar.samskeys.ConfigRegistry;
+import com.lothrazar.samskeys.ConfigMacros;
 import com.lothrazar.samskeys.command.*;
 import com.lothrazar.samskeys.proxy.*;  
 
@@ -57,7 +57,7 @@ public class ModKeyMacros
 	@SidedProxy(clientSide="com.lothrazar.samskeys.proxy.ClientProxy", serverSide="com.lothrazar.samskeys.proxy.CommonProxy")
 	public static CommonProxy proxy;   
 	public static Logger logger; 
-	public static ConfigRegistry cfg;
+	public static ConfigMacros cfg;
 	public static SimpleNetworkWrapper network;  
   
 	@EventHandler
@@ -65,7 +65,7 @@ public class ModKeyMacros
 	{ 
 		logger = event.getModLog();  
 		
-		cfg = new ConfigRegistry(new Configuration(event.getSuggestedConfigurationFile()));
+		cfg = new ConfigMacros(new Configuration(event.getSuggestedConfigurationFile()));
 	  
     	network = NetworkRegistry.INSTANCE.newSimpleChannel( MODID );     	
     	
