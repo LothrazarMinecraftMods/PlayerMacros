@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
    
 
 
+
 import com.lothrazar.samskeys.ConfigMacros;
 import com.lothrazar.samskeys.command.*;
 import com.lothrazar.samskeys.proxy.*;  
@@ -27,6 +28,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
@@ -463,5 +465,15 @@ public class ModKeyMacros
 	public static void execute(EntityPlayer player, String cmd)
 	{
 		MinecraftServer.getServer().getCommandManager().executeCommand(player, cmd);
+	}
+
+	@SubscribeEvent
+	public void onRenderTextOverlay(RenderGameOverlayEvent.Text event)
+	{ 
+		if(Minecraft.getMinecraft().gameSettings.showDebugInfo == false)
+		{
+			CommandSimpleWaypoints.AddWaypointInfo(event); 
+			CommandTodoList.AddWaypointInfo(event); 
+		}
 	}
 }

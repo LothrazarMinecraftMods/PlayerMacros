@@ -9,13 +9,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.lothrazar.samskeys.PlayerPowerups;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraftforge.client.event.RenderGameOverlayEvent.Text;
 import net.minecraftforge.common.DimensionManager;
 
 public class CommandTodoList implements ICommand
@@ -195,6 +198,18 @@ public class CommandTodoList implements ICommand
 	public boolean isUsernameIndex(String[] args, int index)
 	{ 
 		return false;
+	}
+
+	public static void AddWaypointInfo(Text event) 
+	{
+		// TODO Auto-generated method stub
+ 
+		String todoCurrent = GetTodoForPlayer(Minecraft.getMinecraft().thePlayer);
+		
+		if(todoCurrent != null && todoCurrent.trim().isEmpty() == false)
+		{ 
+			event.right.add(todoCurrent.trim());
+		}
 	}
 }
 
