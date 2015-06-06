@@ -33,9 +33,13 @@ public class CommandTodoList implements ICommand
 
 	public CommandTodoList()
 	{  
-	    this.aliases.add("TODO");   
+	    this.aliases.add(getName().toUpperCase());   
 	}
 
+	private static String MODE_ADD = "add"; 
+	private static String MODE_REMOVE = "delete"; 
+	private static String MODE_SET = "set";
+	
 	private static String filenameForPlayer(String playerName)
 	{
 		return "todo_"+playerName +".dat";
@@ -43,7 +47,7 @@ public class CommandTodoList implements ICommand
 	@Override
 	public String getCommandUsage(ICommandSender s) 
 	{ 
-		return "/" + getName()+" <+|-> <text>";
+		return "/" + getName()+" <"+MODE_SET + "|" +MODE_ADD + "|" +MODE_REMOVE+"> <text>";
 	}
    
 	public static String GetTodoForPlayer(EntityPlayer player)
@@ -134,12 +138,12 @@ public class CommandTodoList implements ICommand
 		 
 		 String message = "";
 	   
-		 if(args[0].equals("-"))
+		 if(args[0].equals(MODE_REMOVE))
 		 { 
 			 todoCurrent = "";
 			 args[0] = "";//remove the plus sign 
 		 } 
-		 else if(args[0].equals("+"))
+		 else if(args[0].equals(MODE_ADD))
 		 {
 			 for(int i = 1; i < args.length; i++)
 			 {
@@ -148,7 +152,7 @@ public class CommandTodoList implements ICommand
 			 
 			 todoCurrent += " " + message;//so append
 		 }
-		 else 
+		 else if(args[0].equals(MODE_SET)) 
 		 {
 			 //they just did /todo blah blah
 			 for(int i = 0; i < args.length; i++)
