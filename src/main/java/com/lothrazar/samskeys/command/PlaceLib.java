@@ -65,21 +65,7 @@ public class PlaceLib
 		
 		return PlaceLib.allowed.size() == 0 || PlaceLib.allowed.contains(pblock);
 	}
-	/*
-	private static boolean tryDrainExp(World world, EntityPlayer player, BlockPos pos)
-	{
-		if(XP_COST_PER_PLACE > 0) //do nothing if we cannot pay the cost
-		{
-			if(Util.drainExp(player, XP_COST_PER_PLACE) == false)
-			{
-				Util.addChatMessage(player, "command.place.exp"); 
-				return false;//could not drain xp, so not valid
-			} 
-		}
-		
-		return true;
-	}*/
-	
+ 
 	public static void circle(World world, EntityPlayer player, BlockPos pos, IBlockState placing, int radius) 
 	{
 		// based on http://stackoverflow.com/questions/1022178/how-to-make-a-circle-on-a-grid

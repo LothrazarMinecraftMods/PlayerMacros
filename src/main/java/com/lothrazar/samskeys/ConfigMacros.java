@@ -23,8 +23,8 @@ public class ConfigMacros
 		cmd_ping = instance.getBoolean("ping",category, true,
     			"A command that simply displays your coordinates in chat.  Also use '/ping nether' to show the nether version of your coords.  Useful only if your F3 coordinates are hidden, for example with reducedDebugInfo = true gamerule.");
 		
-		PlaceLib.allowedFromConfig = instance.getString("place.filter",category, "minecraft:dirt,samscontent:block_fragile",
-    			"Filter which blocks can be placed with ALL place commands.  Empty string in this filter means everything is allowed.");
+		PlaceLib.allowedFromConfig = instance.getString("place.filter",category, "",
+    			"Filter which blocks can be placed with ALL place commands.  Empty string in this filter means everything is allowed (default).  EXAMPLE : 'minecraft:dirt,samscontent:block_fragile'");
 		//PlaceLib.XP_COST_PER_PLACE = instance.getInt("place.xp_cost", category, 0, 0, 99, 
 		//		"Experience drained each time a block is placed with one of these commands.");
  
