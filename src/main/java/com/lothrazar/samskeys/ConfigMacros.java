@@ -47,13 +47,13 @@ public class ConfigMacros
 		cmd_home = instance.getBoolean("home",category, true,
     			"Use /home to go to the players spawn point, as defined by a bed."); 
 		
-		CommandHome.REQUIRES_OP = instance.getBoolean("home.needs_op",category, true,
+		CommandHome.REQUIRES_OP = instance.getBoolean("home.needs_op",category, false,
     			"Command is restricted to players with OP (or single player worlds with cheats enabled).");
 
 		worldhome = instance.getBoolean("worldhome",category, true,
     			"Use /worldhome to go to the worlds global spawn point.");  
 		
-		CommandWorldHome.REQUIRES_OP = instance.getBoolean("worldhomehome.needs_op",category, true,
+		CommandWorldHome.REQUIRES_OP = instance.getBoolean("worldhomehome.needs_op",category, false,
     			"Command is restricted to players with OP (or single player worlds with cheats enabled).");
 		
 		cmd_searchspawner = instance.getBoolean("searchspawner",category, true,
