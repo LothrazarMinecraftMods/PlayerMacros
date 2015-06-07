@@ -24,14 +24,14 @@ public class ClientProxy extends CommonProxy
 	public static final String keyPlayerFlipName = "key.playerflip";
 	public static final String keyBind1Name = "key.macro1";
 	public static final String keyBind2Name = "key.macro2";
-	public static final String keyPushName = "key.spell.push";
-	public static final String keyPullName = "key.spell.pull";
-	public static final String keyTransformName = "key.spell.transform";
+	public static final String keyPushName = "key.push";
+	public static final String keyPullName = "key.pull";
+	public static final String keyTransformName = "key.transform";
  
 	public static final String keyCategoryInventory = "key.categories.inventorycontrol";
-	public static final String keyCategoryMacro = "key.categories.macro";
-	public static final String keyCategorySpell = "key.categories.spell";
+	public static final String keyCategoryMacro = "key.categories.macro"; 
 	public static final String keyCategoryBlocks = "key.categories.blocks";
+	
     @Override
     public void registerRenderers() 
     {  

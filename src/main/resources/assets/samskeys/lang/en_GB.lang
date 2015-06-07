@@ -24,6 +24,7 @@ command.bind.done=Command Bound
 command.bind.empty=Macro not bound; first use /bind
 key.categories.macro=Player Macros
 key.categories.blocks=Block Interaction
+key.categories.inventorycontrol=Inventory Movement
 key.columnshiftup=Item Shift Up
 key.columnshiftdown=Item Shift Down
 key.columnbarup=Row Shift Up
