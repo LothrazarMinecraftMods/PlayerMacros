@@ -470,10 +470,7 @@ public class ModKeyMacros
 	@SubscribeEvent
 	public void onRenderTextOverlay(RenderGameOverlayEvent.Text event)
 	{ 
-		if(Minecraft.getMinecraft().gameSettings.showDebugInfo == false)
-		{
-			CommandSimpleWaypoints.AddWaypointInfo(event); 
-			CommandTodoList.AddWaypointInfo(event); 
-		}
+		CommandSimpleWaypoints.AddWaypointInfo(event); 
+		CommandTodoList.AddWaypointInfo(event); 
 	}
 }
