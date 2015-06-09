@@ -14,7 +14,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 public class UtilPistonSpell 
 { 
 	public static ArrayList<Block> ignoreList = new ArrayList<Block>();
-	public static String ignoreListFromConfig = "";
+	private static String ignoreListFromConfig = "";
 	 
 	private static void translateCSV()
 	{
