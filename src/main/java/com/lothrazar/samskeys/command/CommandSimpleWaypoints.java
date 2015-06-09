@@ -25,7 +25,7 @@ import net.minecraftforge.common.DimensionManager;
 public class CommandSimpleWaypoints  implements ICommand
 {
 	public static boolean REQUIRES_OP; 
-		
+	public static boolean ENABLE_TP;
 	//it still functions with flat files if you turn this to false
 	//but set to true uses IExtended properties which is recommended
 	private static final boolean useProps = true; 
@@ -52,9 +52,9 @@ public class CommandSimpleWaypoints  implements ICommand
 
 	@Override
 	public String getCommandUsage(ICommandSender p_71518_1_) 
-	{ 
-		//TODO: MODE_TELEPORT - and have it cost xp - same xp drain as spells
-		return "/" + getName()+" <"+MODE_LIST + "|" + MODE_SAVE + "|"  +MODE_CLEAR + "|" + MODE_HIDEDISPLAY + "|" + MODE_DISPLAY + "|" + MODE_TP + "> [displayname | showindex]";
+	{  
+		String tp = ENABLE_TP ?  "|" + MODE_TP : "";
+		return "/" + getName()+" <"+MODE_LIST + "|" + MODE_SAVE + "|"  +MODE_CLEAR + "|" + MODE_HIDEDISPLAY + "|" + MODE_DISPLAY + tp + "> [displayname | showindex]";
 	}
 
 	@Override
@@ -136,19 +136,14 @@ public class CommandSimpleWaypoints  implements ICommand
 			return;
 		} 
 
-		if(args[0].equals(MODE_TP))
+		if(ENABLE_TP && args[0].equals(MODE_TP))
 		{
 			executeTp(p, index);
 			return;
 		} 
-		//}
-		//catch(Exception e) //NumberFormat not anymore, could be IOOB
-		//{ 
-		//    addChatMessage(p,getCommandUsage(icommandsender));
-		//	return;//not enough args
-		//} 
-		
-//if nothing else
+
+		//if nothing else, as not matched anything:
+		//then this is like the default case in a switch statement
 		p.addChatMessage(new ChatComponentTranslation(getCommandUsage(icommandsender))); 
 	}
 	

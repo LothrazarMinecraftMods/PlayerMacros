@@ -86,6 +86,9 @@ public class ConfigMacros
 		CommandSimpleWaypoints.REQUIRES_OP = instance.getBoolean("simplewaypoint.needs_op",category, false,
     			"Command is restricted to players with OP (or single player worlds with cheats enabled).");
  
+		CommandSimpleWaypoints.ENABLE_TP = instance.getBoolean("simplewaypoint.enable_teleport",category, false,
+    			"Command allows teleporting to waypoints.");
+		 
 		cmd_todo = instance.getBoolean("todo",category, true,
     			"Command that lets players use /todo myreminder text, which will then show whatever text they put on the F3 debug screen."); 
 		
