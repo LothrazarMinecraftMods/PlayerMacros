@@ -4,12 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;   
-   
-
-
-
-import com.lothrazar.samskeys.ConfigMacros;
-import com.lothrazar.samskeys.command.*;
+    
 import com.lothrazar.samskeys.proxy.*;  
 
 import net.minecraft.block.Block;
@@ -59,7 +54,7 @@ public class ModKeyMacros
 	@SidedProxy(clientSide="com.lothrazar.samskeys.proxy.ClientProxy", serverSide="com.lothrazar.samskeys.proxy.CommonProxy")
 	public static CommonProxy proxy;   
 	public static Logger logger; 
-	public static ConfigMacros cfg;
+	//public static ConfigMacros cfg;
 	public static SimpleNetworkWrapper network;  
   
 	@EventHandler
@@ -67,12 +62,12 @@ public class ModKeyMacros
 	{ 
 		logger = event.getModLog();  
 		
-		cfg = new ConfigMacros(new Configuration(event.getSuggestedConfigurationFile()));
+		//cfg = new ConfigMacros(new Configuration(event.getSuggestedConfigurationFile()));
 	  
     	network = NetworkRegistry.INSTANCE.newSimpleChannel( MODID );     	
     	
     	network.registerMessage(MessageKeyPressed.class, MessageKeyPressed.class, MessageKeyPressed.ID, Side.SERVER);
-    	network.registerMessage(MessagePotion.class, MessagePotion.class, MessagePotion.ID, Side.CLIENT);
+    //	network.registerMessage(MessagePotion.class, MessagePotion.class, MessagePotion.ID, Side.CLIENT);
   
 		this.registerEventHandlers();  
 	}
@@ -83,69 +78,13 @@ public class ModKeyMacros
 		proxy.registerRenderers();
 	}
 	
-	@EventHandler
-	public void onServerStarting(FMLServerStartingEvent event)
-	{
-		if(ModKeyMacros.cfg.cmd_searchtrade) 
-			event.registerServerCommand(new CommandSearchTrades()); 
-		
-		if(ModKeyMacros.cfg.cmd_searchitem) 
-			event.registerServerCommand(new CommandSearchItem()); 
-		
-		if(ModKeyMacros.cfg.cmd_searchspawner) 
-			event.registerServerCommand(new CommandSearchSpawner()); 
-		 
-		if(ModKeyMacros.cfg.cmd_simplewaypoint) 
-			event.registerServerCommand(new CommandSimpleWaypoints()); 
-		
-		if(ModKeyMacros.cfg.cmd_enderchest) 
-			event.registerServerCommand(new CommandEnderChest()); 
-		
-		if(ModKeyMacros.cfg.cmd_todo) 
-			event.registerServerCommand(new CommandTodoList());  
-		 
-		if(ModKeyMacros.cfg.cmd_kit)  
-			event.registerServerCommand(new CommandKit()); 
-  
-		if(ModKeyMacros.cfg.cmd_home) 
-			event.registerServerCommand(new CommandWorldHome()); 
-		
-		if(ModKeyMacros.cfg.worldhome) 
-			event.registerServerCommand(new CommandHome());
-
-		if(ModKeyMacros.cfg.cmd_place_blocks) 
-			event.registerServerCommand(new CommandPlaceBlocks());
-	 
-		if(ModKeyMacros.cfg.cmd_recipe) 
-			event.registerServerCommand(new CommandRecipe());
-
-		if(ModKeyMacros.cfg.cmd_uses) 
-			event.registerServerCommand(new CommandUses());
-  
-		if(ModKeyMacros.cfg.cmd_ping) 
-			event.registerServerCommand(new CommandPing());
-		
-		//these ones are always here. no reason to disable.
-	
-		event.registerServerCommand(new CommandBindMacro());
-		event.registerServerCommand(new CommandHearts());
-
-	}
-  
 	private void registerEventHandlers() 
 	{ 
-    	ArrayList<Object> handlers = new ArrayList<Object>();
-   
-     	handlers.add(instance                         );   
-
-     	for(Object h : handlers)
-     		if(h != null)
-	     	{ 
-	    		FMLCommonHandler.instance().bus().register(h); 
-	    		MinecraftForge.EVENT_BUS.register(h); 
-	    		MinecraftForge.TERRAIN_GEN_BUS.register(h);
-	    		MinecraftForge.ORE_GEN_BUS.register(h); 
-	     	} 
+		FMLCommonHandler.instance().bus().register(instance); 
+		MinecraftForge.EVENT_BUS.register(instance); 
+	//	MinecraftForge.TERRAIN_GEN_BUS.register(h);
+	//	MinecraftForge.ORE_GEN_BUS.register(h); 
+	      
 	}
 	public static void incrementPlayerIntegerNBT(EntityPlayer player, String prop, int inc)
 	{
@@ -292,23 +231,12 @@ public class ModKeyMacros
 	{ 
 		player.worldObj.playSoundAtEntity(player, sound, 1.0F, 1.0F);
 	}
-	@SubscribeEvent
-	public void onClonePlayer(PlayerEvent.Clone event) 
-	{ 
-		PlayerPowerups.get(event.entityPlayer).copy(PlayerPowerups.get(event.original));
-	}
+ 
 	public static String lang(String name)
 	{
 		return StatCollector.translateToLocal(name);
 	}
-	@SubscribeEvent
- 	public void onEntityConstructing(EntityConstructing event)
- 	{ 
- 		if (event.entity instanceof EntityPlayer && PlayerPowerups.get((EntityPlayer) event.entity) == null)
- 		{ 
- 			PlayerPowerups.register((EntityPlayer) event.entity);
- 		} 
- 	}
+ 
 	public static void decrHeldStackSize(EntityPlayer entityPlayer) 
 	{
 		decrHeldStackSize(entityPlayer,1);
@@ -336,6 +264,7 @@ public class ModKeyMacros
 	{ 
 		player.addChatMessage(new ChatComponentTranslation(string));
 	}
+	
 	public static EnumFacing getPlayerFacing(EntityPlayer player) 
 	{
     	int yaw = (int)player.rotationYaw;
@@ -355,15 +284,7 @@ public class ModKeyMacros
 		if(pos != null)
 			spawnParticle(world,type,pos.getX(),pos.getY(),pos.getZ());
     }	
-	//IMPORTANT: if you are on the client side already, DO NOT use this, use the regular one
-		//this sends a packet from server to client, telling what particle to use
-	public static void spawnParticlePacketByID(BlockPos position, int particleID)
-	{
-		//this. fires only on server side. so send packet for client to spawn particles and so on
-		ModKeyMacros.network.sendToAll(new MessagePotion(position, particleID));
-    	
-		
-	}
+ 
 	public static String posToString(BlockPos position) 
 	{ 
 		return "["+ position.getX() + ", "+position.getY()+", "+position.getZ()+"]";
@@ -381,43 +302,7 @@ public class ModKeyMacros
 			entity.setPositionAndUpdate(entity.posX, entity.posY + 1.0D, entity.posZ);
 		}
 	}
-	public static ArrayList<BlockPos> findBlocks(EntityPlayer player, Block blockHunt, int RADIUS ) 
-	{        
-		ArrayList<BlockPos> found = new ArrayList<BlockPos>();
-		int xMin = (int) player.posX - RADIUS;
-		int xMax = (int) player.posX + RADIUS;
-
-		int yMin = (int) player.posY - RADIUS;
-		int yMax = (int) player.posY + RADIUS;
-
-		int zMin = (int) player.posZ - RADIUS;
-		int zMax = (int) player.posZ + RADIUS;
-		 
-		int xDistance, zDistance, distance , distanceClosest = RADIUS * RADIUS;
-		
-		BlockPos posCurrent = null; 
-		for (int xLoop = xMin; xLoop <= xMax; xLoop++)
-		{
-			for (int yLoop = yMin; yLoop <= yMax; yLoop++)
-			{
-				for (int zLoop = zMin; zLoop <= zMax; zLoop++)
-				{  
-					posCurrent = new BlockPos(xLoop, yLoop, zLoop);
-					if(player.worldObj.getBlockState(posCurrent).getBlock().equals(blockHunt))
-					{ 
-						xDistance = (int) Math.abs(xLoop - player.posX );
-						zDistance = (int) Math.abs(zLoop - player.posZ );
-						
-						distance = (int) distanceBetweenHorizontal(player.getPosition(), posCurrent);
-						
-						found.add(posCurrent);
-					} 
-				}
-			}
-		}
-		
-		return found; 
-	}
+	
 	public static double distanceBetweenHorizontal(BlockPos start, BlockPos end)
 	{
 		int xDistance =  Math.abs(start.getX() - end.getX() );
@@ -467,10 +352,4 @@ public class ModKeyMacros
 		MinecraftServer.getServer().getCommandManager().executeCommand(player, cmd);
 	}
 
-	@SubscribeEvent
-	public void onRenderTextOverlay(RenderGameOverlayEvent.Text event)
-	{ 
-		CommandSimpleWaypoints.AddWaypointInfo(event); 
-		CommandTodoList.AddWaypointInfo(event); 
-	}
 }

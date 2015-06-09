@@ -1,7 +1,6 @@
 package com.lothrazar.samskeys.proxy;
-   
-import com.lothrazar.samskeys.command.CommandBindMacro;
-import com.lothrazar.samskeys.PlayerPowerups; 
+    
+import com.lothrazar.samskeys.CommandBindMacro;
 import com.lothrazar.samskeys.UtilBlockTransform;
 import com.lothrazar.samskeys.UtilPistonSpell;
 
@@ -45,7 +44,7 @@ public class MessageKeyPressed implements IMessage, IMessageHandler<MessageKeyPr
 	public IMessage onMessage(MessageKeyPressed message, MessageContext ctx)
 	{  
 		EntityPlayer player = ctx.getServerHandler().playerEntity; 
-		PlayerPowerups props = PlayerPowerups.get(player);
+ 
 		World world = player.worldObj;
 		BlockPos posMouse = Minecraft.getMinecraft().objectMouseOver.getBlockPos();
 		//THANKS TO THIS

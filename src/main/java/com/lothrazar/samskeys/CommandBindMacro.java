@@ -1,9 +1,8 @@
-package com.lothrazar.samskeys.command;
+package com.lothrazar.samskeys;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lothrazar.samskeys.ModKeyMacros;
 import com.lothrazar.samskeys.proxy.ClientProxy; 
 
 import net.minecraft.command.CommandException;
