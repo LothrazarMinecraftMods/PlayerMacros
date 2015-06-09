@@ -52,14 +52,7 @@ public class ModKeyMacros
 	public void onPreInit(FMLPreInitializationEvent event)
 	{ 
 		logger = event.getModLog();  
-	
-		
-		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 
-		String csv = config.getString("push_pull_ignore",MODID, "minecraft:cactus,minecraft:chest",
-    			"Ignore list for push and pull keys.");
-		UtilPistonSpell.seIgnoreBlocksFromString(csv);
-		
     	network = NetworkRegistry.INSTANCE.newSimpleChannel( MODID );     	
     	
     	network.registerMessage(MessageKeyPressed.class, MessageKeyPressed.class, MessageKeyPressed.ID, Side.SERVER);
@@ -95,23 +88,7 @@ public class ModKeyMacros
 	@SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) 
     {   
-        if(ClientProxy.keyShiftUp.isPressed() )
-        { 	     
-        	 ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyShiftUp.getKeyCode()));  
-        }        
-        else if(ClientProxy.keyShiftDown.isPressed() )
-        { 	      
-        	 ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyShiftDown.getKeyCode()));  
-        }      
-        else if(ClientProxy.keyBarDown.isPressed() )
-        { 	      
-        	 ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBarDown.getKeyCode()));  
-        }  
-        else if(ClientProxy.keyBarUp.isPressed() )
-        { 	      
-        	 ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBarUp.getKeyCode()));  
-        }   
-        else if(ClientProxy.keyBindMacro1.isPressed())
+        if(ClientProxy.keyBindMacro1.isPressed())
         {
        		ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBindMacro1.getKeyCode()));
         }
@@ -119,18 +96,6 @@ public class ModKeyMacros
         {
        		ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBindMacro2.getKeyCode()));
         }
-        else if(ClientProxy.keyPush.isPressed())
-        {
-       		ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyPush.getKeyCode()));
-        }
-        else if(ClientProxy.keyPull.isPressed())
-        {
-       		ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyPull.getKeyCode()));
-        }
-        else if(ClientProxy.keyTransform.isPressed())
-        {
-       		ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyTransform.getKeyCode()));
-        } 
     } 
 	
 	public static void playSoundAt(World world,BlockPos pos, String sound)
