@@ -3,8 +3,8 @@
   "modList": [{
     "modid": "samskeys",
     "name": "Sam's Keys and Macros",
-    "description": ".",
-    "version": "1.0.0",
+    "description": "Macro keybindings that can be bound in-game to any command, along with its argument.  For exampe, /bind m toggledownfall.",
+    "version": "1.8-1.0.0",
     "mcversion": "1.8",
     "url": "https://github.com/PrinceOfAmber/SamsPowerups/releases",
     "updateUrl": "",
