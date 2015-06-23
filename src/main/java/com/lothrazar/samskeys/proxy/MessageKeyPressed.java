@@ -50,10 +50,16 @@ public class MessageKeyPressed implements IMessage, IMessageHandler<MessageKeyPr
 	 	{
 			CommandBindMacro.tryExecuteMacro(player, ClientProxy.keyBind2Name);
 	 	}
+		else if( message.keyPressed == ClientProxy.keyBindMacro3.getKeyCode())
+	 	{
+			CommandBindMacro.tryExecuteMacro(player, ClientProxy.keyBind3Name);
+	 	}
+		else if( message.keyPressed == ClientProxy.keyBindMacro4.getKeyCode())
+	 	{
+			CommandBindMacro.tryExecuteMacro(player, ClientProxy.keyBind4Name);
+	 	}
 		
 		return null;
 	}
-
-	
 }
  
