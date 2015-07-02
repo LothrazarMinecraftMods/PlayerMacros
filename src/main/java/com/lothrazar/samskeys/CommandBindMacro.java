@@ -14,10 +14,10 @@ import net.minecraft.util.BlockPos;
 public class CommandBindMacro implements ICommand
 {
 	public static boolean REQUIRES_OP = false;//not in config on purpose
-	private static String KEY_MACRO_base = "key.macro";
+	public static String KEY_MACRO_base = "key.macro";
 	private ArrayList<String> aliases = new ArrayList<String>();
-	private static int KMIN=1;
-	private static int KMAX=2;
+	public static final int KMIN=1;
+	public static final int KMAX=4;
 	public CommandBindMacro()
 	{
 		this.aliases.add(getName().toUpperCase());
@@ -110,12 +110,20 @@ public class CommandBindMacro implements ICommand
 			return;
 		}
 		
-		player.getEntityData().setString(KEY_MACRO_base + match, full);
+		setPlayerMacro(player,match,full);
 
 		ModKeyMacros.addChatMessage(player, ModKeyMacros.lang("command.bind.done")+" "+inKey+" "+full);
 		
 	}
-	  
+
+	public static void setPlayerMacro(EntityPlayer player,int macroNumber, String full)
+	{
+		player.getEntityData().setString(KEY_MACRO_base + macroNumber, full);
+	}
+	public static String getPlayerMacro(EntityPlayer player,int macroNumber)
+	{
+		return player.getEntityData().getString(KEY_MACRO_base + macroNumber);
+	}
 	public static String getPlayerMacro(EntityPlayer player,String macro)
 	{
 		return player.getEntityData().getString(macro);

@@ -38,7 +38,7 @@ public class MessageKeyPressed implements IMessage, IMessageHandler<MessageKeyPr
 	{  
 		EntityPlayer player = ctx.getServerHandler().playerEntity; 
  
-		CommandBindMacro.tryExecuteMacro(player,"key.macro"+message.macroNumber);
+		CommandBindMacro.tryExecuteMacro(player,CommandBindMacro.KEY_MACRO_base+message.macroNumber);
 
 		return null;
 	}

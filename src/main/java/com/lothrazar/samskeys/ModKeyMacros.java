@@ -90,9 +90,15 @@ public class ModKeyMacros
 	{ 
 		if(event.wasDeath)//false means switched dimensions
 		{
-			System.out.println("TODO : clone macros over");
+			System.out.println(" clone macros over");
 			
-			
+			String macro;
+			for(int k = CommandBindMacro.KMIN; k <= CommandBindMacro.KMAX; k++)
+			{
+				macro = CommandBindMacro.getPlayerMacro(event.original,CommandBindMacro.KEY_MACRO_base + k);
+
+				CommandBindMacro.setPlayerMacro(event.entityPlayer, k, macro);
+			}
 			
 		}
 	}
