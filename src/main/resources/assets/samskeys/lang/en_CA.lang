@@ -3,3 +3,5 @@ key.macro1=Macro 1
 key.macro2=Macro 2
 key.macro3=Macro 3
 key.macro4=Macro 4
+command.bind.empty=Empty macro, use /bind
+command.bind.done=Macro saved

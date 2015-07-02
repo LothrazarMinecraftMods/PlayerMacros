@@ -99,7 +99,6 @@ public class ModKeyMacros
 
 				CommandBindMacro.setPlayerMacro(event.entityPlayer, k, macro);
 			}
-			
 		}
 	}
 	
