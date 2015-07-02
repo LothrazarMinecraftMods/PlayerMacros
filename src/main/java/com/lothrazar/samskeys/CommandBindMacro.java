@@ -70,17 +70,7 @@ public class CommandBindMacro implements ICommand
 			
 			return;
 		}
-		//so it wasnt list, and not empty
-		//String inKey = args[0];
-		/*
-		if(inKey.length() != 1)
-		{
-			ModKeyMacros.addChatMessage(player, getCommandUsage(sender));
-			return;
-		}*/
-	// System.out.println("searching for "+inKey);
-		
-		
+
 		int key = 0;
 		try
 		{			
@@ -105,63 +95,13 @@ public class CommandBindMacro implements ICommand
 		}
 		 
 		full = full.replace("//", "/");//in case it is typed in for us
-		/*
-		int match = 0;
-		//String oldLetter = KEY_MACRO_base + mac;
-		String s;
-		for(int k = KMIN; k <= KMAX; k++)
-		{
-			if(inKey.equalsIgnoreCase( getKeyDescription(k)))
-			{
-				match = k;
-				break;//end loop
-			}
-		}
-		 
-		if(match == 0)
-		{
-			//letter not bound
-			ModKeyMacros.lang("command.bind.empty");
-			return;
-		}*/
-		
+
 		setPlayerMacro(player,key,full);
 
 		ModKeyMacros.addChatMessage(player, ModKeyMacros.lang("command.bind.done")+" "+key+" "+full);
 		
 	}
-/*
-	public static String getKeyDescription(int key)
-	{
-		//getKeyDescription gets something like 'key.macro1' like lang file data
-		
-		//thanks http://stackoverflow.com/questions/10893455/getting-keytyped-from-the-keycode
-	 //could do getFromName("key.macro"+key)//if that existed
-		KeyBinding binding = null;
-		switch(key)//TODO:...maybe find better way. switch for now
-		{
-		case 1:
-			binding = ClientProxy.keyBindMacro1;
-			break;
-		case 2:
-			binding = ClientProxy.keyBindMacro2;
-			break;
-		case 3:
-			binding = ClientProxy.keyBindMacro3;
-			break;
-		case 4:
-			binding = ClientProxy.keyBindMacro4;
-			break;
-		}
-		
-		 
-		if(binding == null)
-			return "";
-		else
-			return GameSettings.getKeyDisplayString(binding.getKeyCode());
-			//return I18n.format(binding.getKeyDescription(), new Object[0]);
-			//return java.awt.event.KeyEvent.getKeyText(binding.getKeyCode());
-	}*/
+
 	public static void setPlayerMacro(EntityPlayer player,int macroNumber, String full)
 	{
 		player.getEntityData().setString(KEY_MACRO_base + macroNumber, full);
@@ -185,7 +125,6 @@ public class CommandBindMacro implements ICommand
 			return;
 		}
 		
-	 
 		ModKeyMacros.execute(player,cmd);
 	}
 
