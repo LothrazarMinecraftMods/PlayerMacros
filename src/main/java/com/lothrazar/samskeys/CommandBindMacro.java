@@ -2,9 +2,6 @@ package com.lothrazar.samskeys;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.lothrazar.samskeys.proxy.ClientProxy; 
-
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -38,7 +35,7 @@ public class CommandBindMacro implements ICommand
 	@Override
 	public String getCommandUsage(ICommandSender sender)
 	{
-		return "/"+getName() +" list OR /"+getName()+" <letter> <command> [args]";
+		return "/"+getName() +" list OR /"+getName()+" <number> <command> [args]";
 	}
 
 	@Override
@@ -67,21 +64,39 @@ public class CommandBindMacro implements ICommand
 				mList = getPlayerMacro(player,KEY_MACRO_base + k);
 				if(mList==null || mList.isEmpty()) {mList = ModKeyMacros.lang("command.bind.empty");}
 				// ClientProxy.keyBind1 real name not number
-				String keyname = ClientProxy.getKeyDescription(k);
-				ModKeyMacros.addChatMessage(player, keyname+" : "+mList);
+				//String keyname = getKeyDescription(k);
+				ModKeyMacros.addChatMessage(player, k+" : "+mList);
 			}
 			
 			return;
 		}
 		//so it wasnt list, and not empty
-		String inKey = args[0];
-		
+		//String inKey = args[0];
+		/*
 		if(inKey.length() != 1)
 		{
 			ModKeyMacros.addChatMessage(player, getCommandUsage(sender));
 			return;
+		}*/
+	// System.out.println("searching for "+inKey);
+		
+		
+		int key = 0;
+		try
+		{			
+			key = Integer.parseInt(args[0]);
 		}
-	 
+		catch(Exception e)
+		{
+			ModKeyMacros.addChatMessage(player, getCommandUsage(sender));
+			return;
+		}
+		
+		if(key < KMIN || key > KMAX)
+		{
+			ModKeyMacros.addChatMessage(player, getCommandUsage(sender));
+			return;
+		}
 		
 		String full = "/";
 		for(int i = 1; i < args.length; i++)
@@ -90,13 +105,13 @@ public class CommandBindMacro implements ICommand
 		}
 		 
 		full = full.replace("//", "/");//in case it is typed in for us
-		
+		/*
 		int match = 0;
 		//String oldLetter = KEY_MACRO_base + mac;
 		String s;
 		for(int k = KMIN; k <= KMAX; k++)
 		{
-			if(inKey.equalsIgnoreCase( ClientProxy.getKeyDescription(k)))
+			if(inKey.equalsIgnoreCase( getKeyDescription(k)))
 			{
 				match = k;
 				break;//end loop
@@ -108,14 +123,45 @@ public class CommandBindMacro implements ICommand
 			//letter not bound
 			ModKeyMacros.lang("command.bind.empty");
 			return;
-		}
+		}*/
 		
-		setPlayerMacro(player,match,full);
+		setPlayerMacro(player,key,full);
 
-		ModKeyMacros.addChatMessage(player, ModKeyMacros.lang("command.bind.done")+" "+inKey+" "+full);
+		ModKeyMacros.addChatMessage(player, ModKeyMacros.lang("command.bind.done")+" "+key+" "+full);
 		
 	}
-
+/*
+	public static String getKeyDescription(int key)
+	{
+		//getKeyDescription gets something like 'key.macro1' like lang file data
+		
+		//thanks http://stackoverflow.com/questions/10893455/getting-keytyped-from-the-keycode
+	 //could do getFromName("key.macro"+key)//if that existed
+		KeyBinding binding = null;
+		switch(key)//TODO:...maybe find better way. switch for now
+		{
+		case 1:
+			binding = ClientProxy.keyBindMacro1;
+			break;
+		case 2:
+			binding = ClientProxy.keyBindMacro2;
+			break;
+		case 3:
+			binding = ClientProxy.keyBindMacro3;
+			break;
+		case 4:
+			binding = ClientProxy.keyBindMacro4;
+			break;
+		}
+		
+		 
+		if(binding == null)
+			return "";
+		else
+			return GameSettings.getKeyDisplayString(binding.getKeyCode());
+			//return I18n.format(binding.getKeyDescription(), new Object[0]);
+			//return java.awt.event.KeyEvent.getKeyText(binding.getKeyCode());
+	}*/
 	public static void setPlayerMacro(EntityPlayer player,int macroNumber, String full)
 	{
 		player.getEntityData().setString(KEY_MACRO_base + macroNumber, full);
