@@ -5,36 +5,32 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
 
 public class MessageKeyPressed implements IMessage, IMessageHandler<MessageKeyPressed, IMessage>
 {
-	private byte keyPressed;
+	private int macroNumber;
 	  
 	public static final int ID = 0;
 	public MessageKeyPressed()
 	{ 
 	}
 	
-	public MessageKeyPressed(int keyCode)
+	public MessageKeyPressed(int macroNum)
 	{ 
-		this.keyPressed = (byte)keyCode;
+		this.macroNumber = macroNum;
 	}
 	
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
-		this.keyPressed = buf.readByte();
+		this.macroNumber = buf.readInt();
 	}
 	
 	@Override
 	public void toBytes(ByteBuf buf)
 	{
-		buf.writeByte(keyPressed);
+		buf.writeInt(macroNumber);
 	}
 	
 	@Override
@@ -42,23 +38,8 @@ public class MessageKeyPressed implements IMessage, IMessageHandler<MessageKeyPr
 	{  
 		EntityPlayer player = ctx.getServerHandler().playerEntity; 
  
-		if( message.keyPressed == ClientProxy.keyBindMacro1.getKeyCode())//TODO: better code structure here?
-	 	{
-			CommandBindMacro.tryExecuteMacro(player,ClientProxy.keyBind1Name);
-	 	}
-		else if( message.keyPressed == ClientProxy.keyBindMacro2.getKeyCode())
-	 	{
-			CommandBindMacro.tryExecuteMacro(player, ClientProxy.keyBind2Name);
-	 	}
-		else if( message.keyPressed == ClientProxy.keyBindMacro3.getKeyCode())
-	 	{
-			CommandBindMacro.tryExecuteMacro(player, ClientProxy.keyBind3Name);
-	 	}
-		else if( message.keyPressed == ClientProxy.keyBindMacro4.getKeyCode())
-	 	{
-			CommandBindMacro.tryExecuteMacro(player, ClientProxy.keyBind4Name);
-	 	}
-		
+		CommandBindMacro.tryExecuteMacro(player,"key.macro"+message.macroNumber);
+
 		return null;
 	}
 }

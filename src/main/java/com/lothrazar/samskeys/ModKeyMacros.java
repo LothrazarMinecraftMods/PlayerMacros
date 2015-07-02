@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;     
+
 import com.lothrazar.samskeys.proxy.*;  
 
 import net.minecraft.block.Block;
@@ -20,6 +21,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -82,18 +84,42 @@ public class ModKeyMacros
 		prev += inc; 
 		player.getEntityData().setInteger(prop, prev);
 	}
-   
+	
+	@SubscribeEvent
+	public void onClonePlayer(PlayerEvent.Clone event) 
+	{ 
+		if(event.wasDeath)//false means switched dimensions
+		{
+			System.out.println("TODO : clone macros over");
+			
+			
+			
+		}
+	}
+	
 	@SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) 
     {   
+		int macroNumber = -1;
         if(ClientProxy.keyBindMacro1.isPressed())
         {
-       		ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBindMacro1.getKeyCode()));
+        	macroNumber = 1;
         }
         else if(ClientProxy.keyBindMacro2.isPressed())
         {
-       		ModKeyMacros.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBindMacro2.getKeyCode()));
+        	macroNumber = 2;
         }
+        else if(ClientProxy.keyBindMacro3.isPressed())
+        {
+        	macroNumber = 3;
+        }
+        else if(ClientProxy.keyBindMacro4.isPressed())
+        {
+        	macroNumber = 4;
+        }
+        
+        if(macroNumber > 0)
+        	ModKeyMacros.network.sendToServer( new MessageKeyPressed(macroNumber));
     } 
 	
 	public static void playSoundAt(World world,BlockPos pos, String sound)
