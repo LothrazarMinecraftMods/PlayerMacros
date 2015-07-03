@@ -3,7 +3,7 @@
   "modList": [{
     "modid": "samskeys",
     "name": "Macro Keys",
-    "description": "Macro keybindings that can be bound in-game to any command, along with its arguments.  For exampe, /bind m toggledownfall.  Bindings are saved per player.",
+    "description": "Macro keybindings that can be bound in-game to any command, along with its arguments.  Use the /bind command.",
     "version": "1.8-1.0.0",
     "mcversion": "1.8",
     "url": "https://github.com/PrinceOfAmber/SamsPowerups/releases",
